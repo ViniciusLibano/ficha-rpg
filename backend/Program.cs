@@ -3,8 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using RpgApi.Domain.Entities;
 using RpgApi.Infrastructure.Contexts;
 
+DotNetEnv.Env.Load();
+
 var builder = WebApplication.CreateBuilder(args);
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+
+var connectionString = Environment
+    .GetEnvironmentVariable("DB_CONN_STRING")
+        ?? string.Empty;
 
 builder.Services.AddDbContext<MainDbContext>(options =>
     options.UseNpgsql(connectionString));

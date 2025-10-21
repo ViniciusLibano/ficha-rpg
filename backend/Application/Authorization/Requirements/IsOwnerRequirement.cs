@@ -1,6 +1,8 @@
-﻿namespace RpgApi.Application.Authorization.Requirements;
+﻿using Microsoft.AspNetCore.Authorization;
 
-public class IsOwnerRequirement
+namespace RpgApi.Application.Authorization.Requirements;
+
+public class IsOwnerRequirement : IAuthorizationRequirement
 {
     
 }
