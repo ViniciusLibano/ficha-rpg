@@ -49,7 +49,8 @@ public class IsInSessionHandler(
             return;
         }
 
-        if (session.PlayersLink.Any(gs =>
+        if (session.GameMasterId == userId ||
+            session.PlayersLink.Any(gs =>
             gs.PlayerId == userId))
         {
             handlerContext.Succeed(requirement);
