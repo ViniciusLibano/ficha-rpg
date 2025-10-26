@@ -1,26 +1,16 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using RpgApi.Application.Extensions;
 using RpgApi.Domain.Entities;
 using RpgApi.Infrastructure.Contexts;
+using RpgApi.Infrastructure.Extensions;
 
 DotNetEnv.Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = Environment
-    .GetEnvironmentVariable("DB_CONN_STRING")
-        ?? string.Empty;
-
-builder.Services.AddDbContext<MainDbContext>(options =>
-    options.UseNpgsql(connectionString));
-
-builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
-{
-    options.Password.RequireDigit = true;
-    options.Password.RequiredLength = 8;
-})
-.AddEntityFrameworkStores<MainDbContext>();
-
+builder.Services.AddInfrasctructureServices();
+builder.Services.AddApplicationServices();
 builder.Services.AddControllers();
 
 builder.Services.Configure<RouteOptions>(options =>

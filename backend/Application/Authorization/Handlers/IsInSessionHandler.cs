@@ -8,7 +8,7 @@ namespace RpgApi.Application.Authorization.Handlers;
 
 public class IsInSessionHandler(
     MainDbContext context,
-    IHttpContextAccessor httpContextAcessor
+    IHttpContextAccessor httpContextAccessor
 ) : AuthorizationHandler<IsInSessionRequirement>
 {
     protected override async Task HandleRequirementAsync(
@@ -22,7 +22,7 @@ public class IsInSessionHandler(
             return;
         }
 
-        var httpContext = httpContextAcessor.HttpContext;
+        var httpContext = httpContextAccessor.HttpContext;
         if (httpContext == null)
         {
             handlerContext.Fail();
